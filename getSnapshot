@@ -104,7 +104,7 @@
         printf "$PROGNAME version $PROGVER\n"
         printf "Cassandra snapshot packaging utility\n\n"
         printf "Copyright 2016 Applied Infrastructure, LLC\n\n"
-        printf "Licensed under the Apache License, Version 2.0 (the "License");\n"
+        printf "Licensed under the Apache License, Version 2.0 (the \"License\");\n"
         printf "you may not use this file except in compliance with the License.\n"
         printf "You may obtain a copy of the License at\n\n"
         printf "    http://www.apache.org/licenses/LICENSE-2.0\n\n"

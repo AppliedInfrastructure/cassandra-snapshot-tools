@@ -20,21 +20,24 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 * Most Cassandra versions supported (detailed list coming soon)
 
 ### Basic Usage Examples
-1. Copy a keyspace to the same Cassandra cluster using a different keyspace name:  
-```sh
-$ getSnapshot -k <keyspace_name>
-$ putSnapshot -f <snapshot package file> -k <new keyspace name>
-```
-2. Copy a keyspace to a remote Cassandra cluster using the same keyspace name:  
-```sh
-$ getSnapshot -k <keyspace_name>
-$ putSnapshot -f <snapshot package file> -n <destination node IP>
-```
-3. Copy a keyspace from a Cassandra cluster to a single-node instance using a different keyspace name:  
-```sh
-$ getSnapshot -k <keyspace_name>
-$ putSnapshot -f <snapshot package file> -n <destination node IP> -k <new keyspace name> -r 1
-```
+1. Copy a keyspace to the same Cassandra cluster using a different keyspace name:
+
+    ```sh
+    $ getSnapshot -k <keyspace_name>
+    $ putSnapshot -f <snapshot package file> -k <new keyspace name>
+    ```
+2. Copy a keyspace to a remote Cassandra cluster using the same keyspace name:
+
+    ```sh
+    $ getSnapshot -k <keyspace_name>
+    $ putSnapshot -f <snapshot package file> -n <destination node IP>
+    ```
+3. Copy a keyspace from a Cassandra cluster to a single-node instance using a different keyspace name:
+
+    ```sh
+    $ getSnapshot -k <keyspace_name>
+    $ putSnapshot -f <snapshot package file> -n <destination node IP> -k <new keyspace name> -r 1
+    ```
 
 ### Caveats
 * Partitioner configuration (e.g. RandomPartitioner, Murmur3Partitioner, etc.) must be the same between source and destination Cassandra clusters.

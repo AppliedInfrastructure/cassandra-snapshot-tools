@@ -28,7 +28,7 @@
 # Configuration
 # -------------
     PROGNAME="putSnapshot"
-    PROGVER="1.0"
+    PROGVER="1.0.0"
     ASFCFG="/etc/cassandra"
     DSECFG="/etc/dse/cassandra"
     TEMPDIR="$( pwd )/${PROGNAME}.tmp${RANDOM}"

@@ -8,6 +8,7 @@ Please review the [Issue Tracker](https://github.com/AppliedInfrastructure/cassa
 
 ### Pull Requests Welcome
 If something doesn't quite work the way you'd like, and you'd like to contribute a fix:
+
 1. [Open an Issue](https://github.com/AppliedInfrastructure/cassandra-snapshot-tools/issues) that describes the defect/enhancement.
 2. [Fork the Repository](https://github.com/AppliedInfrastructure/cassandra-snapshot-tools/fork_select)
 3. Create a branch (`git checkout -b <your branch>`)

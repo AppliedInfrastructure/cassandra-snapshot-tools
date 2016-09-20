@@ -1,0 +1,34 @@
+language: bash
+
+sudo: required
+
+services:
+  - docker
+
+env:
+CASSANDRA_VER=2.1
+CASSANDRA_VER=2.2
+CASSANDRA_VER=3.0
+CASSANDRA_VER=3.7
+
+before_install:
+- docker pull cassandra:${CASSANDRA_VER}
+- docker run --name c01n01 -d cassandra:${CASSANDRA_VER}
+- docker run --name c01n02 -e CASSANDRA_SEEDS="$( docker inspect --format='{{ .NetworkSettings.IPAddress }}' c01n01 )" -d cassandra:${CASSANDRA_VER}
+- docker run --name c02n01 -d cassandra:${CASSANDRA_VER}
+- docker ps -a
+
+install:
+- docker cp ./getSnapshot c01n01:/root/
+- docker cp ./putSnapshot c01n02:/root/
+- docker cp ./putSnapshot c02n01:/root/
+- docker cp ./test/testData.cql c01n01:/root/
+- sleep 60
+- docker exec c01n01 nodetool info
+- docker exec c01n01 cqlsh -f /root/testData.cql
+
+script:
+- docker exec c01n01 cqlsh <<< "DESCRIBE KEYSPACES" 
+- docker exec c01n01 /root/getSnapshot -k test_keyspace01
+- docker exec c01n01 /root/putSnapshot -f *.tar.gz -k test_keyspace02
+- docker exec c01n01 cqlsh <<< "DESCRIBE KEYSPACES" 

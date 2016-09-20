@@ -24,11 +24,11 @@ install:
   - docker cp ./putSnapshot c02n01:/root/
   - docker cp ./test/testData.cql c01n01:/root/
   - sleep 60
-  - docker exec c01n01 nodetool info
-  - docker exec c01n01 cqlsh -f /root/testData.cql
+  - docker exec c01n01 bash -c "nodetool info"
+  - docker exec c01n01 bash -c "cqlsh -f /root/testData.cql"
 
 script:
-  - docker exec c01n01 cqlsh <<< "DESCRIBE KEYSPACES" 
-  - docker exec c01n01 /root/getSnapshot -k test_keyspace01
-  - docker exec c01n01 /root/putSnapshot -f *.tar.gz -k test_keyspace02
-  - docker exec c01n01 cqlsh <<< "DESCRIBE KEYSPACES" 
+  - docker exec c01n01 bash -c "cqlsh <<< 'DESCRIBE KEYSPACES'"
+  - docker exec c01n01 bash -c "/root/getSnapshot -k test_keyspace01"
+  - docker exec c01n01 bash -c "/root/putSnapshot -f *.tar.gz -k test_keyspace02"
+  - docker exec c01n01 bash -c "cqlsh <<< 'DESCRIBE KEYSPACES'"

@@ -20,7 +20,7 @@ before_install:
 
 install:
   - docker cp ./getSnapshot c01n01:/root/
-  - docker cp ./putSnapshot c01n02:/root/
+  - docker cp ./putSnapshot c01n01:/root/
   - docker cp ./putSnapshot c02n01:/root/
   - docker cp ./test/testData.cql c01n01:/root/
   - sleep 60

@@ -1,5 +1,5 @@
 CREATE KEYSPACE test_keyspace01
-WITH replication = { 'class': 'SimpleStrategy', 'datacenter1': '2' };
+WITH replication = { 'class': 'NetworkTopologyStrategy', 'datacenter1': '2' };
 
 USE test_keyspace01;
 

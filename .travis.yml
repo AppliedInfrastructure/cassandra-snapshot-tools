@@ -6,6 +6,7 @@ services:
   - docker
 
 env:
+  - CASSANDRA_VER=2.0
   - CASSANDRA_VER=2.1
   - CASSANDRA_VER=2.2
   - CASSANDRA_VER=3.0
@@ -22,13 +23,17 @@ install:
   - docker cp ./getSnapshot c01n01:/root/
   - docker cp ./putSnapshot c01n01:/root/
   - docker cp ./putSnapshot c02n01:/root/
-  - docker cp ./test/testData.cql c01n01:/root/
+  - docker cp ./test/testData_SimpleStrategy.cql c01n01:/root/
+  - docker cp ./test/testData_NetworkTopologyStrategy.cql c01n01:/root/
   - sleep 60
   - docker exec c01n01 bash -c "nodetool info"
-  - docker exec c01n01 bash -c "cqlsh -f /root/testData.cql"
+  - docker exec c01n01 bash -c "cqlsh -f /root/testData_SimpleStrategy.cql"
+  - docker exec c01n01 bash -c "cqlsh -f /root/testData_NetworkTopologyStrategy.cql"
 
 script:
   - docker exec c01n01 bash -c "cqlsh <<< 'DESCRIBE KEYSPACES'"
-  - docker exec c01n01 bash -c "/root/getSnapshot -k test_keyspace01"
-  - docker exec c01n01 bash -c "/root/putSnapshot -f *.tar.gz -k test_keyspace02"
+  - docker exec c01n01 bash -c "cqlsh <<< 'SELECT count(*) FROM test_keyspace01_topology.playlists;'"
+  - docker exec c01n01 bash -c "/root/getSnapshot -k test_keyspace01_topology"
+  - docker exec c01n01 bash -c "/root/putSnapshot -f *.tar.gz -k test_keyspace02_topology"
   - docker exec c01n01 bash -c "cqlsh <<< 'DESCRIBE KEYSPACES'"
+  - docker exec c01n01 bash -c "cqlsh <<< 'SELECT count(*) FROM test_keyspace02_topology.playlists;'"

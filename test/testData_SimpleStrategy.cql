@@ -1,7 +1,7 @@
-CREATE KEYSPACE test_keyspace01
-WITH replication = { 'class': 'NetworkTopologyStrategy', 'datacenter1': '2' };
+CREATE KEYSPACE test_keyspace01_simple
+WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '2' };
 
-USE test_keyspace01;
+USE test_keyspace01_simple;
 
 CREATE TABLE playlists (
   id uuid,

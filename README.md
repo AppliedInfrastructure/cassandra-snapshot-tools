@@ -1,4 +1,4 @@
-# Cassandra Snapshot Tools
+# Cassandra Snapshot Tools [![Build Status](https://travis-ci.org/AppliedInfrastructure/cassandra-snapshot-tools.svg?branch=master)](https://travis-ci.org/AppliedInfrastructure/cassandra-snapshot-tools)
 A handy couple of scripts that make creating, moving, and restoring SSTable snapshots between clusters easy.  Some common use cases include:
 * Copying keyspaces between clusters (QA environments, for example)
 * Staging an upgrade (application, Cassandra, both) using a copy of live data

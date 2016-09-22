@@ -32,7 +32,7 @@
 # Configuration
 # -------------
     PROGNAME="getSnapshot"
-    PROGVER="1.0.0"
+    PROGVER="1.0.1"
     ASFCFG="/etc/cassandra"
     DSECFG="/etc/dse/cassandra"
     DUMPDIR="$( pwd )/${PROGNAME}.tmp${RANDOM}"

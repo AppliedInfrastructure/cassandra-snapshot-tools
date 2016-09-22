@@ -17,7 +17,7 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 * Change keyspace name, datacenter name and replication factor on restore
 * Restore to local or remote clusters, either privately hosted or through hosted services like [Datascale.io](http://datascale.io)
 * Easy to use with sane defaults
-* Most Cassandra versions supported (detailed list coming soon)
+* Most Cassandra versions supported (tested against Cassandra 2.0, 2.1, 2.2, 3.0, and 3.7)
 
 ### Basic Usage Examples
 1. Copy a keyspace to the same Cassandra cluster using a different keyspace name:

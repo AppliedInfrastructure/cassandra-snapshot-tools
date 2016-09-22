@@ -256,7 +256,7 @@
         sed -i 's/'$FILEKSNAME'/'$KEYSPACE'/g' "$SCHEMAFILE"
         mv "${TEMPDIR}/${FILEKSNAME}" "${TEMPDIR}/${KEYSPACE}"
         for dbfile in $( find "${TEMPDIR}/${KEYSPACE}" -type f ); do
-            if grep "${FILEKSNAME}" <<< "${dbfile}"; then
+            if grep "${FILEKSNAME}" <<< "${dbfile}" >/dev/null; then
                 mv "$dbfile" "${dbfile//$FILEKSNAME/$KEYSPACE}"
             fi
         done

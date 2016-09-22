@@ -255,9 +255,7 @@
     SNAPDIR="snapshots/$SNAPSHOT"
     SCHEMA="schema-$KEYSPACE-$TIMESTAMP.cdl"
 
-    for dir in $( find "$DATADIR" -regex ".*/$SNAPDIR/[^\.]*Index.db" -o \
-                                  -regex ".*/$SNAPDIR/[^\.]*Data.db" -o \
-                                  -regex ".*/$SNAPDIR/[^\.]*Info.db" ); do
+    for dir in $( find "$DATADIR" -regex ".*/$SNAPDIR/[^\.]*.db" ); do
         NEWDIR=$( sed "s|${DATADIR}||" <<< $( dirname $dir ) | \
                   awk -F / '{print "/"$2"/"$3}' )
 

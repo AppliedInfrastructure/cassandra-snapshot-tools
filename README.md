@@ -23,20 +23,27 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 1. Copy a keyspace to the same Cassandra cluster using a different keyspace name:
 
     ```sh
-    $ getSnapshot -k <keyspace_name>
+    $ getSnapshot -k <keyspace name>
     $ putSnapshot -f <snapshot package file> -k <new keyspace name>
     ```
 2. Copy a keyspace to a remote Cassandra cluster using the same keyspace name:
 
     ```sh
-    $ getSnapshot -k <keyspace_name>
+    $ getSnapshot -k <keyspace name>
     $ putSnapshot -f <snapshot package file> -n <destination node IP>
     ```
-3. Copy a keyspace from a Cassandra cluster to a single-node instance using a different keyspace name:
+3. Copy a keyspace from a Cassandra cluster to a remote cluster using a different keyspace name and replication factor:
 
     ```sh
-    $ getSnapshot -k <keyspace_name>
+    $ getSnapshot -k <keyspace name>
     $ putSnapshot -f <snapshot package file> -n <destination node IP> -k <new keyspace name> -r 1
+    ```
+4. Copy a snapshot previously created using `nodetool snapshot` to a new keyspace:
+
+    ```sh
+    $ nodetool snapshot <keyspace name> -t <custom snapshot name>
+    $ getSnapshot -k <keyspace name> -s custom snapshot name>
+    $ putSnapshot -f <snapshot package file> -k <new keyspace name>
     ```
 
 ### Caveats

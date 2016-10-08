@@ -21,6 +21,7 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 
 ### Usage
 #### getSnapshot
+
     ```sh
     Usage: ./getSnapshot -h
            ./getSnapshot -k <keyspace name> [-s <snapshot name>] [-y <cassandra.yaml file>] [--no-timestamp]
@@ -33,6 +34,7 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
     ```
 
 #### putSnapshot
+
     ```sh
     Usage: ./putSnapshot -h
            ./putSnapshot -f <snapshot file> [-n <node address>] [-k <new ks name>] [-d <new dc name>] [-r <new rf>] [-y <cassandra.yaml file>]

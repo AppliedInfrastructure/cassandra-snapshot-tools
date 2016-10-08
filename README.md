@@ -42,11 +42,12 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 
     ```sh
     $ nodetool snapshot <keyspace name> -t <custom snapshot name>
-    $ getSnapshot -k <keyspace name> -s custom snapshot name>
+    $ getSnapshot -k <keyspace name> -s <custom snapshot name>
     $ putSnapshot -f <snapshot package file> -k <new keyspace name>
     ```
 
 ### Caveats
+* Currently supports snapshots/restores between clusters running similar versions of Cassandra.
 * Partitioner configuration (e.g. RandomPartitioner, Murmur3Partitioner, etc.) must be the same between source and destination Cassandra clusters.
 * Local access to the source Cassandra node is required (to create/collect snapshot files).  Fairly open network access is required to the destination Cassandra node (to create the schema and load SSTables).
 

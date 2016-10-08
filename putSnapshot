@@ -81,7 +81,7 @@
 
     function usage() {
         printf "Usage: $0 -h\n"
-        printf "       $0 -f <snapshot file> [-n <node address>] [-k <new ks name>] [-d <new dc name>] [-r <new rf>] {-y <cassandra.yaml file>]\n"
+        printf "       $0 -f <snapshot file> [-n <node address>] [-k <new ks name>] [-d <new dc name>] [-r <new rf>] [-y <cassandra.yaml file>]\n"
         printf "    -h,--help                          Print usage and exit\n"
         printf "    -v,--version                       Print version information and exit\n"
         printf "    -f,--file <snapshot file>          REQUIRED: The snapshot file name (created using the\n"

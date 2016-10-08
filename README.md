@@ -19,7 +19,41 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 * Easy to use with sane defaults
 * Most Cassandra versions supported (tested against Cassandra 2.0, 2.1, 2.2, 3.0, and 3.7)
 
-### Basic Usage Examples
+### Usage
+#### getSnapshot
+    ```sh
+    Usage: ./getSnapshot -h
+           ./getSnapshot -k <keyspace name> [-s <snapshot name>] [-y <cassandra.yaml file>] [--no-timestamp]
+        -h,--help                          Print usage and exit
+        -v,--version                       Print version information and exit
+        -k,--keyspace <keyspace name>      REQUIRED: The name of the keyspace to snapshot
+        -s,--snapshot <snapshot name>      The name of an existing snapshot to package
+        -y,--yaml <cassandra.yaml file>    Alternate cassandra.yaml file
+        --no-timestamp                     Don't include a timestamp in the resulting filename
+    ```
+
+#### putSnapshot
+    ```sh
+    Usage: ./putSnapshot -h
+           ./putSnapshot -f <snapshot file> [-n <node address>] [-k <new ks name>] [-d <new dc name>] [-r <new rf>] [-y <cassandra.yaml file>]
+        -h,--help                          Print usage and exit
+        -v,--version                       Print version information and exit
+        -f,--file <snapshot file>          REQUIRED: The snapshot file name (created using the
+                                           getSnapshot utility
+        -n,--node <node address>           Destination Cassandra node IP (defaults to the local
+                                           Cassandra IP if run on a Cassandra node, otherwise
+                                           required in order to connect to Cassandra.  Will take
+                                           precedence if provided and run on a Cassandra node
+        -k,--keyspace <new ks name>        Override the destination keyspace name (defaults to
+                                           the source keyspace name)
+        -d,--datacenter <new dc name>      Override the destination datacenter name (defaults
+                                           to the sourcen datacenter name)
+        -r,--replication <new rf>          Override the destination replication factor (defaults
+                                           to source replication factor)
+        -y,--yaml <cassandra.yaml file>    Alternate cassandra.yaml file
+    ```
+
+### Basic Examples
 1. Copy a keyspace to the same Cassandra cluster using a different keyspace name:
 
     ```sh

@@ -22,7 +22,6 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
 ### Usage
 #### getSnapshot
 
-    ```sh
     Usage: ./getSnapshot -h
            ./getSnapshot -k <keyspace name> [-s <snapshot name>] [-y <cassandra.yaml file>] [--no-timestamp]
         -h,--help                          Print usage and exit
@@ -31,11 +30,9 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
         -s,--snapshot <snapshot name>      The name of an existing snapshot to package
         -y,--yaml <cassandra.yaml file>    Alternate cassandra.yaml file
         --no-timestamp                     Don't include a timestamp in the resulting filename
-    ```
 
 #### putSnapshot
 
-    ```sh
     Usage: ./putSnapshot -h
            ./putSnapshot -f <snapshot file> [-n <node address>] [-k <new ks name>] [-d <new dc name>] [-r <new rf>] [-y <cassandra.yaml file>]
         -h,--help                          Print usage and exit
@@ -53,7 +50,6 @@ Cassandra Snapshot Tools currently includes two BASH shell scripts, `getSnapshot
         -r,--replication <new rf>          Override the destination replication factor (defaults
                                            to source replication factor)
         -y,--yaml <cassandra.yaml file>    Alternate cassandra.yaml file
-    ```
 
 ### Basic Examples
 1. Copy a keyspace to the same Cassandra cluster using a different keyspace name:

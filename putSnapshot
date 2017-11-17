@@ -246,7 +246,7 @@
     # Place schema on single line and extract replication setup
     FILEREPL=$( sed ':a;N;$!ba;s/\n/ /g' "$SCHEMAFILE" | \
                 grep -Eo 'replication ?= ?{[^}]*}' | \
-                tr -dc "[:alnum:],:=" | \
+                tr -dc "[:alnum:],:=_" | \
                 cut -d, -f 2 )
     FILEDCNAME=$( cut -d: -f 1 <<< ${FILEREPL} )
     FILERFACTOR=$( cut -d: -f 2 <<< ${FILEREPL} )

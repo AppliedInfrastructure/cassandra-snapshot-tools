@@ -253,7 +253,8 @@
 
     if [ ! -z $KEYSPACE ]; then
         # Update keyspace names in snapshot
-        sed -i 's/'$FILEKSNAME'/'$KEYSPACE'/g' "$SCHEMAFILE"
+        sed -i 's/\s'$FILEKSNAME'\s/ '$KEYSPACE' /g' "$SCHEMAFILE"
+        sed -i 's/\s'$FILEKSNAME\.'/ '$KEYSPACE\.'/g' "$SCHEMAFILE"
         mv "${TEMPDIR}/${FILEKSNAME}" "${TEMPDIR}/${KEYSPACE}"
         for dbfile in $( find "${TEMPDIR}/${KEYSPACE}" -type f ); do
             if grep "${FILEKSNAME}" <<< "${dbfile}" >/dev/null; then

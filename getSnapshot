@@ -228,7 +228,7 @@
         # Create a new snapshot if a snapshot name was not provided
         printf "No snapshot name provided, creating new snapshot\n"
 
-        nodetool -h $JMXIP flush $KEYSPACE
+        nodetool -h $JMXIP flush -- $KEYSPACE
         OUTPUT=$( nodetool -h $JMXIP snapshot $KEYSPACE 2>&1 )
         SNAPSHOT=$( grep -Eo '[0-9]{10}[0-9]+' <<< "$OUTPUT" | tail -1 )
 

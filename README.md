@@ -1,4 +1,4 @@
-This repository fixes issues that [the original snapshot tool](https://travis-ci.org/AppliedInfrastructure/cassandra-snapshot-tools) has:
+This repository fixes issues that [the original snapshot tool](https://github.com/AppliedInfrastructure/cassandra-snapshot-tools) has:
 
 * It searches and replaces the original keyspace name even the name appears in the path and are not meant to be replaced.
 * It does not match the dot literal correctly.

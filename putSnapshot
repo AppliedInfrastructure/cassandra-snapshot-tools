@@ -85,7 +85,7 @@
         printf "    -h,--help                          Print usage and exit\n"
         printf "    -v,--version                       Print version information and exit\n"
         printf "    -f,--file <snapshot file>          REQUIRED: The snapshot file name (created using the\n"
-        printf "                                       getSnapshot utility\n"
+        printf "                                       getSnapshot utility)\n"
         printf "    -n,--node <node address>           Destination Cassandra node IP (defaults to the local\n"
         printf "                                       Cassandra IP if run on a Cassandra node, otherwise\n"
         printf "                                       required in order to connect to Cassandra.  Will take\n"
@@ -96,6 +96,8 @@
         printf "                                       to the sourcen datacenter name)\n"
         printf "    -r,--replication <new rf>          Override the destination replication factor (defaults\n"
         printf "                                       to source replication factor)\n"
+        printf "    -t,--table-keyspace-name <boolean> Replace the original keyspace string if it appears in\n"
+        printf "                                       a table name (defaults to true)\n"
         printf "    -y,--yaml <cassandra.yaml file>    Alternate cassandra.yaml file\n"
         exit 0
     }
@@ -120,8 +122,8 @@
 # --------------------------
     # Great sample getopt implementation by Cosimo Streppone
     # https://gist.github.com/cosimo/3760587#file-parse-options-sh
-    SHORT='hvd:f:n:k:r:y:'
-    LONG='help,version,datacenter:,file:,node:,keyspace:,replication:,yaml:'
+    SHORT='hvd:f:n:k:r:t:y:'
+    LONG='help,version,datacenter:,file:,node:,keyspace:,replication:,table-keyspace-name:,yaml:'
     OPTS=$( getopt -o $SHORT --long $LONG -n "$0" -- "$@" )
 
     if [ $? -gt 0 ]; then
@@ -141,6 +143,7 @@
             -d|--datacenter) DATACENTER="$2"; shift 2;;
             -r|--replication) RFACTOR="$2"; shift 2;;
             -y|--yaml) INPYAML="$2"; shift 2;;
+            -t|--table-keyspace-name) TABLE_KEYSPACE_NAME="$2"; shift 2;;
             --) shift; break;;
             *) printf "Error processing command arguments\n" >&2; exit 1;;
         esac
@@ -254,13 +257,15 @@
     if [ ! -z $KEYSPACE ]; then
         # Update keyspace names in snapshot
         sed -i 's/\s'$FILEKSNAME'\s/ '$KEYSPACE' /g' "$SCHEMAFILE"
-        sed -i 's/\s'$FILEKSNAME\.'/ '$KEYSPACE\.'/g' "$SCHEMAFILE"
+        sed -i 's/\s'$FILEKSNAME\\.'/ '$KEYSPACE\.'/g' "$SCHEMAFILE"
         mv "${TEMPDIR}/${FILEKSNAME}" "${TEMPDIR}/${KEYSPACE}"
-        for dbfile in $( find "${TEMPDIR}/${KEYSPACE}" -type f ); do
-            if grep "${FILEKSNAME}" <<< "${dbfile}" >/dev/null; then
-                mv "$dbfile" "${dbfile//$FILEKSNAME/$KEYSPACE}"
-            fi
-        done
+        if [ "x${TABLE_KEYSPACE_NAME}" != "xfalse" ]; then
+            for dbfile in $( cd "${TEMPDIR}/${KEYSPACE}" && find . -type f ); do
+                if grep "${FILEKSNAME}" <<< "${dbfile}" >/dev/null; then
+                    echo mv "$dbfile" "${dbfile//$FILEKSNAME/$KEYSPACE}"
+                fi
+            done
+        fi
         NEWKSNAME=$KEYSPACE
     else
         NEWKSNAME=$FILEKSNAME
